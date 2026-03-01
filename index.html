@@ -1,0 +1,284 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Семь шагов назад — официальный сайт</title>
+<meta name="theme-color" content="#050510" />
+
+<style>
+:root{
+--text:#ffffff;
+--muted:rgba(255,255,255,.75);
+--card:rgba(255,255,255,.06);
+--line:rgba(255,255,255,.12);
+--radius:22px;
+}
+
+*{box-sizing:border-box;}
+body{
+margin:0;
+font-family:system-ui,-apple-system,sans-serif;
+background:#050510;
+color:var(--text);
+overflow-x:hidden;
+}
+
+/* ===== HERO ===== */
+
+.hero{
+position:relative;
+min-height:100vh;
+display:flex;
+align-items:center;
+justify-content:center;
+text-align:center;
+padding:40px 20px;
+}
+
+.hero img{
+position:absolute;
+inset:-5%;
+width:110%;
+height:110%;
+object-fit:cover;
+object-position:center 25%;
+z-index:-2;
+animation: bgMove 18s ease-in-out infinite;
+}
+
+@keyframes bgMove{
+0%{transform:scale(1.05) translate(0,0);}
+50%{transform:scale(1.1) translate(-10px,8px);}
+100%{transform:scale(1.05) translate(0,0);}
+}
+
+.hero::after{
+content:"";
+position:absolute;
+inset:0;
+background:
+linear-gradient(to bottom, rgba(0,0,0,.8), rgba(0,0,0,.6) 40%, rgba(0,0,0,.9));
+z-index:-1;
+}
+
+.hero-content{
+max-width:800px;
+animation:fadeUp 1s ease forwards;
+}
+
+@keyframes fadeUp{
+from{opacity:0; transform:translateY(20px);}
+to{opacity:1; transform:translateY(0);}
+}
+
+/* ===== НЕОН НАЗВАНИЕ ===== */
+
+.hero h1{
+font-size:clamp(36px,6vw,64px);
+margin:0 0 15px;
+text-shadow:
+0 0 10px rgba(255,255,255,.2),
+0 0 25px rgba(34,211,238,.6),
+0 0 45px rgba(124,58,237,.6);
+animation:neonPulse 3s ease-in-out infinite;
+}
+
+@keyframes neonPulse{
+0%,100%{
+text-shadow:
+0 0 10px rgba(255,255,255,.2),
+0 0 25px rgba(34,211,238,.5),
+0 0 45px rgba(124,58,237,.5);
+}
+50%{
+text-shadow:
+0 0 14px rgba(255,255,255,.3),
+0 0 35px rgba(34,211,238,.8),
+0 0 60px rgba(124,58,237,.8);
+}
+}
+
+.subtitle{
+color:var(--muted);
+margin-bottom:25px;
+}
+
+/* ===== КНОПКИ ===== */
+
+.buttons{
+display:flex;
+flex-wrap:wrap;
+gap:12px;
+justify-content:center;
+}
+
+.btn{
+padding:14px 20px;
+border-radius:14px;
+border:1px solid rgba(255,255,255,.2);
+background:rgba(255,255,255,.08);
+color:#fff;
+text-decoration:none;
+font-weight:600;
+transition:.2s;
+position:relative;
+}
+
+.btn:hover{
+background:rgba(255,255,255,.18);
+transform:translateY(-2px);
+}
+
+/* YouTube glow */
+.btn.youtube::before{
+content:"";
+position:absolute;
+inset:-8px;
+border-radius:18px;
+background:radial-gradient(circle, rgba(124,58,237,.4), transparent 60%);
+filter:blur(12px);
+z-index:-1;
+opacity:.6;
+transition:.3s;
+}
+.btn.youtube:hover::before{
+opacity:1;
+filter:blur(16px);
+}
+
+/* ===== СЕКЦИИ ===== */
+
+.section{
+max-width:900px;
+margin:auto;
+padding:60px 20px;
+}
+
+.card{
+background:var(--card);
+border:1px solid var(--line);
+border-radius:var(--radius);
+padding:24px;
+margin-bottom:24px;
+opacity:0;
+transform:translateY(20px);
+transition:all .7s ease;
+}
+
+.card.show{
+opacity:1;
+transform:translateY(0);
+}
+
+.card h2{
+margin-top:0;
+}
+
+.muted{
+color:var(--muted);
+line-height:1.6;
+}
+
+.links a{
+display:block;
+margin-bottom:12px;
+padding:14px;
+border-radius:16px;
+background:rgba(255,255,255,.05);
+border:1px solid var(--line);
+text-decoration:none;
+color:white;
+transition:.2s;
+}
+
+.links a:hover{
+background:rgba(255,255,255,.1);
+}
+
+footer{
+text-align:center;
+padding:30px 20px;
+color:rgba(255,255,255,.5);
+font-size:13px;
+}
+</style>
+</head>
+
+<body>
+
+<section class="hero">
+<img src="cover.jpg" alt="Семь шагов назад">
+
+<div class="hero-content">
+<h1>Семь шагов назад</h1>
+<p class="subtitle">
+Поп-исполнитель. Музыка о чувствах, которые остаются с тобой.
+</p>
+
+<div class="buttons">
+<a class="btn youtube" href="https://youtube.com/@sevenstepsback.official" target="_blank">YouTube</a>
+<a class="btn" href="https://t.me/seven_steps_back_official" target="_blank">Telegram</a>
+<a class="btn" href="https://vk.com/sevenstepsback" target="_blank">VK</a>
+<a class="btn" href="mailto:7stepsback.official@gmail.com">Написать</a>
+</div>
+</div>
+</section>
+
+<section class="section">
+
+<div class="card reveal">
+<h2>Скоро релиз</h2>
+<p class="muted">
+Новости о релизе и даты будут опубликованы в сообществах.
+Подпишись на Telegram и VK, чтобы не пропустить.
+</p>
+</div>
+
+<div class="card reveal">
+<h2>Обо мне</h2>
+<p class="muted">
+Семь шагов назад — начинающий певец. Настоящее имя — <b>Степанов Алексей Сергеевич</b>.
+Родился <b>26.07.2005</b> в <b>Константиновске</b>. Живу в Ростовской области, город <b>Шахты</b>.<br><br>
+Я создаю поп-музыку, в которой важны эмоции, искренность и атмосфера.
+Этот проект — способ говорить о чувствах честно и без лишнего шума.
+</p>
+</div>
+
+<div class="card reveal">
+<h2>Контакты</h2>
+<p class="muted">
+7stepsback.official@gmail.com
+</p>
+</div>
+
+<div class="card links reveal">
+<a href="https://www.instagram.com/seven_steps_back" target="_blank">Instagram</a>
+<a href="https://youtube.com/@sevenstepsback.official" target="_blank">YouTube</a>
+<a href="https://t.me/seven_steps_back_official" target="_blank">Telegram</a>
+<a href="https://vk.com/sevenstepsback" target="_blank">ВКонтакте</a>
+</div>
+
+</section>
+
+<footer>
+© <span id="year"></span> Семь шагов назад
+</footer>
+
+<script>
+document.getElementById("year").textContent = new Date().getFullYear();
+
+const cards = document.querySelectorAll(".card");
+const observer = new IntersectionObserver(entries=>{
+entries.forEach(entry=>{
+if(entry.isIntersecting){
+entry.target.classList.add("show");
+}
+});
+},{threshold:0.15});
+
+cards.forEach(card=>observer.observe(card));
+</script>
+
+</body>
+</html>
