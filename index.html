@@ -1,284 +1,329 @@
 <!doctype html>
 <html lang="ru">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Семь шагов назад — официальный сайт</title>
-<meta name="theme-color" content="#050510" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Семь шагов назад — официальный сайт</title>
+  <meta name="theme-color" content="#070712" />
 
-<style>
-:root{
---text:#ffffff;
---muted:rgba(255,255,255,.75);
---card:rgba(255,255,255,.06);
---line:rgba(255,255,255,.12);
---radius:22px;
-}
+  <style>
+    :root{
+      --bg:#070712;
+      --text:#ffffff;
+      --muted: rgba(255,255,255,.75);
+      --card: rgba(255,255,255,.08);
+      --line: rgba(255,255,255,.14);
+      --radius: 22px;
+      --shadow: 0 20px 60px rgba(0,0,0,.45);
+      --max: 1100px;
+    }
 
-*{box-sizing:border-box;}
-body{
-margin:0;
-font-family:system-ui,-apple-system,sans-serif;
-background:#050510;
-color:var(--text);
-overflow-x:hidden;
-}
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      color:var(--text);
+      font-family: system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      background: var(--bg);
+      overflow-x:hidden;
+    }
 
-/* ===== HERO ===== */
+    /* ====== Background ====== */
+    .bg{
+      position:fixed;
+      inset:0;
+      z-index:-3;
+      background:
+        url("cover.jpg") center 25% / cover no-repeat;
+      transform: scale(1.05);
+      filter: brightness(.85) contrast(1.05) saturate(1.05);
+      animation: bgFloat 18s ease-in-out infinite;
+    }
+    @keyframes bgFloat{
+      0%   {transform:scale(1.06) translate3d(0,0,0)}
+      50%  {transform:scale(1.10) translate3d(-10px,8px,0)}
+      100% {transform:scale(1.06) translate3d(0,0,0)}
+    }
+    .overlay{
+      position:fixed;
+      inset:0;
+      z-index:-2;
+      background:
+        radial-gradient(1200px 800px at 20% 20%, rgba(124,58,237,.25), transparent 60%),
+        radial-gradient(900px 700px at 80% 30%, rgba(34,211,238,.18), transparent 55%),
+        linear-gradient(to bottom, rgba(7,7,18,.55), rgba(7,7,18,.80) 55%, rgba(7,7,18,.92));
+    }
+    .grain{
+      position:fixed;
+      inset:0;
+      z-index:-1;
+      pointer-events:none;
+      opacity:.07;
+      background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23n)' opacity='.55'/%3E%3C/svg%3E");
+    }
 
-.hero{
-position:relative;
-min-height:100vh;
-display:flex;
-align-items:center;
-justify-content:center;
-text-align:center;
-padding:40px 20px;
-}
+    /* ====== Layout ====== */
+    .wrap{
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 26px 18px 60px;
+    }
 
-.hero img{
-position:absolute;
-inset:-5%;
-width:110%;
-height:110%;
-object-fit:cover;
-object-position:center 25%;
-z-index:-2;
-animation: bgMove 18s ease-in-out infinite;
-}
+    .hero{
+      min-height: 92vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding: 24px 0 10px;
+    }
 
-@keyframes bgMove{
-0%{transform:scale(1.05) translate(0,0);}
-50%{transform:scale(1.1) translate(-10px,8px);}
-100%{transform:scale(1.05) translate(0,0);}
-}
+    .hero-card{
+      width:100%;
+      max-width: 780px;
+      padding: 26px 22px;
+      border: 1px solid var(--line);
+      background: rgba(10,10,22,.35);
+      backdrop-filter: blur(16px);
+      border-radius: 28px;
+      box-shadow: var(--shadow);
+    }
 
-.hero::after{
-content:"";
-position:absolute;
-inset:0;
-background:
-linear-gradient(to bottom, rgba(0,0,0,.8), rgba(0,0,0,.6) 40%, rgba(0,0,0,.9));
-z-index:-1;
-}
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding:10px 14px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.08);
+      border:1px solid rgba(255,255,255,.14);
+      color: rgba(255,255,255,.85);
+      font-size: 13px;
+    }
+    .dot{
+      width:10px;height:10px;border-radius:50%;
+      background: radial-gradient(circle at 30% 30%, #22d3ee, #7c3aed);
+      box-shadow: 0 0 18px rgba(34,211,238,.45);
+    }
 
-.hero-content{
-max-width:800px;
-animation:fadeUp 1s ease forwards;
-}
+    h1{
+      margin:14px 0 10px;
+      font-size: clamp(34px, 5.5vw, 62px);
+      line-height:1.05;
+      letter-spacing: -0.02em;
+      text-shadow:
+        0 0 12px rgba(255,255,255,.18),
+        0 0 30px rgba(34,211,238,.45),
+        0 0 58px rgba(124,58,237,.55);
+      animation: neon 3.2s ease-in-out infinite;
+    }
+    @keyframes neon{
+      0%,100%{
+        text-shadow:
+          0 0 12px rgba(255,255,255,.18),
+          0 0 30px rgba(34,211,238,.40),
+          0 0 58px rgba(124,58,237,.50);
+      }
+      50%{
+        text-shadow:
+          0 0 16px rgba(255,255,255,.25),
+          0 0 40px rgba(34,211,238,.65),
+          0 0 72px rgba(124,58,237,.70);
+      }
+    }
 
-@keyframes fadeUp{
-from{opacity:0; transform:translateY(20px);}
-to{opacity:1; transform:translateY(0);}
-}
+    .lead{
+      margin: 0 0 18px;
+      color: var(--muted);
+      font-size: clamp(14px, 2.2vw, 18px);
+      line-height: 1.55;
+      max-width: 60ch;
+    }
 
-/* ===== НЕОН НАЗВАНИЕ ===== */
+    .btns{
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px;
+      margin-top: 16px;
+    }
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding: 12px 16px;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,.18);
+      background: rgba(255,255,255,.08);
+      color: #fff;
+      text-decoration:none;
+      font-weight: 650;
+      transition: transform .18s ease, background .18s ease, box-shadow .18s ease;
+      min-width: 132px;
+    }
+    .btn:hover{transform: translateY(-2px); background: rgba(255,255,255,.14)}
+    .btn:active{transform: translateY(0)}
 
-.hero h1{
-font-size:clamp(36px,6vw,64px);
-margin:0 0 15px;
-text-shadow:
-0 0 10px rgba(255,255,255,.2),
-0 0 25px rgba(34,211,238,.6),
-0 0 45px rgba(124,58,237,.6);
-animation:neonPulse 3s ease-in-out infinite;
-}
+    .btn.youtube{
+      position:relative;
+      background: linear-gradient(135deg, rgba(124,58,237,.45), rgba(34,211,238,.25));
+      border-color: rgba(34,211,238,.25);
+      box-shadow: 0 0 22px rgba(124,58,237,.25);
+    }
+    .btn.youtube::after{
+      content:"";
+      position:absolute;
+      inset:-10px;
+      border-radius: 22px;
+      background: radial-gradient(circle at 30% 30%, rgba(124,58,237,.45), transparent 60%);
+      filter: blur(14px);
+      opacity:.75;
+      z-index:-1;
+      transition: .2s;
+    }
+    .btn.youtube:hover::after{opacity:1; filter: blur(16px)}
 
-@keyframes neonPulse{
-0%,100%{
-text-shadow:
-0 0 10px rgba(255,255,255,.2),
-0 0 25px rgba(34,211,238,.5),
-0 0 45px rgba(124,58,237,.5);
-}
-50%{
-text-shadow:
-0 0 14px rgba(255,255,255,.3),
-0 0 35px rgba(34,211,238,.8),
-0 0 60px rgba(124,58,237,.8);
-}
-}
+    /* ===== Sections / Cards ===== */
+    .grid{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+      margin-top: 22px;
+    }
+    @media (min-width: 860px){
+      .grid{ grid-template-columns: 1fr 1fr; }
+      .span2{ grid-column: 1 / -1; }
+    }
 
-.subtitle{
-color:var(--muted);
-margin-bottom:25px;
-}
+    .card{
+      border:1px solid var(--line);
+      background: var(--card);
+      backdrop-filter: blur(16px);
+      border-radius: var(--radius);
+      padding: 20px 18px;
+      box-shadow: 0 16px 40px rgba(0,0,0,.25);
+      opacity:0;
+      transform: translateY(18px);
+      transition: opacity .7s ease, transform .7s ease;
+    }
+    .card.show{opacity:1; transform: translateY(0)}
+    .card h2{
+      margin: 0 0 10px;
+      font-size: 22px;
+      letter-spacing: -0.01em;
+    }
+    .card p{
+      margin:0;
+      color: rgba(255,255,255,.80);
+      line-height:1.65;
+      font-size: 15.5px;
+    }
 
-/* ===== КНОПКИ ===== */
+    .links a{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      padding: 14px 14px;
+      border-radius: 16px;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.06);
+      color:#fff;
+      text-decoration:none;
+      transition:.18s;
+      margin-top: 10px;
+    }
+    .links a:hover{background: rgba(255,255,255,.11); transform: translateY(-1px)}
+    .arrow{opacity:.7}
 
-.buttons{
-display:flex;
-flex-wrap:wrap;
-gap:12px;
-justify-content:center;
-}
+    footer{
+      text-align:center;
+      padding: 26px 10px 30px;
+      color: rgba(255,255,255,.55);
+      font-size: 13px;
+    }
 
-.btn{
-padding:14px 20px;
-border-radius:14px;
-border:1px solid rgba(255,255,255,.2);
-background:rgba(255,255,255,.08);
-color:#fff;
-text-decoration:none;
-font-weight:600;
-transition:.2s;
-position:relative;
-}
-
-.btn:hover{
-background:rgba(255,255,255,.18);
-transform:translateY(-2px);
-}
-
-/* YouTube glow */
-.btn.youtube::before{
-content:"";
-position:absolute;
-inset:-8px;
-border-radius:18px;
-background:radial-gradient(circle, rgba(124,58,237,.4), transparent 60%);
-filter:blur(12px);
-z-index:-1;
-opacity:.6;
-transition:.3s;
-}
-.btn.youtube:hover::before{
-opacity:1;
-filter:blur(16px);
-}
-
-/* ===== СЕКЦИИ ===== */
-
-.section{
-max-width:900px;
-margin:auto;
-padding:60px 20px;
-}
-
-.card{
-background:var(--card);
-border:1px solid var(--line);
-border-radius:var(--radius);
-padding:24px;
-margin-bottom:24px;
-opacity:0;
-transform:translateY(20px);
-transition:all .7s ease;
-}
-
-.card.show{
-opacity:1;
-transform:translateY(0);
-}
-
-.card h2{
-margin-top:0;
-}
-
-.muted{
-color:var(--muted);
-line-height:1.6;
-}
-
-.links a{
-display:block;
-margin-bottom:12px;
-padding:14px;
-border-radius:16px;
-background:rgba(255,255,255,.05);
-border:1px solid var(--line);
-text-decoration:none;
-color:white;
-transition:.2s;
-}
-
-.links a:hover{
-background:rgba(255,255,255,.1);
-}
-
-footer{
-text-align:center;
-padding:30px 20px;
-color:rgba(255,255,255,.5);
-font-size:13px;
-}
-</style>
+    /* small phones */
+    @media (max-width: 380px){
+      .btn{min-width: 120px}
+      .hero-card{padding: 22px 16px}
+    }
+  </style>
 </head>
 
 <body>
+  <div class="bg"></div>
+  <div class="overlay"></div>
+  <div class="grain"></div>
 
-<section class="hero">
-<img src="cover.jpg" alt="Семь шагов назад">
+  <div class="wrap">
 
-<div class="hero-content">
-<h1>Семь шагов назад</h1>
-<p class="subtitle">
-Поп-исполнитель. Музыка о чувствах, которые остаются с тобой.
-</p>
+    <section class="hero">
+      <div class="hero-card">
+        <div class="badge"><span class="dot"></span>Поп-исполнитель • официальный сайт</div>
 
-<div class="buttons">
-<a class="btn youtube" href="https://youtube.com/@sevenstepsback.official" target="_blank">YouTube</a>
-<a class="btn" href="https://t.me/seven_steps_back_official" target="_blank">Telegram</a>
-<a class="btn" href="https://vk.com/sevenstepsback" target="_blank">VK</a>
-<a class="btn" href="mailto:7stepsback.official@gmail.com">Написать</a>
-</div>
-</div>
-</section>
+        <h1>Семь шагов назад</h1>
+        <p class="lead">
+          Поп-исполнитель. Музыка о чувствах, которые остаются с тобой.
+        </p>
 
-<section class="section">
+        <div class="btns">
+          <a class="btn youtube" href="https://youtube.com/@sevenstepsback.official" target="_blank" rel="noopener">YouTube</a>
+          <a class="btn" href="https://t.me/seven_steps_back_official" target="_blank" rel="noopener">Telegram</a>
+          <a class="btn" href="https://vk.com/sevenstepsback" target="_blank" rel="noopener">VK</a>
+          <a class="btn" href="mailto:7stepsback.official@gmail.com">Написать</a>
+        </div>
+      </div>
+    </section>
 
-<div class="card reveal">
-<h2>Скоро релиз</h2>
-<p class="muted">
-Новости о релизе и даты будут опубликованы в сообществах.
-Подпишись на Telegram и VK, чтобы не пропустить.
-</p>
-</div>
+    <section class="grid">
+      <div class="card reveal span2">
+        <h2>Скоро релиз</h2>
+        <p>Новости о релизе и даты будут опубликованы в сообществах. Подпишись на Telegram и VK, чтобы не пропустить.</p>
+      </div>
 
-<div class="card reveal">
-<h2>Обо мне</h2>
-<p class="muted">
-Семь шагов назад — начинающий певец. Настоящее имя — <b>Степанов Алексей Сергеевич</b>.
-Родился <b>26.07.2005</b> в <b>Константиновске</b>. Живу в Ростовской области, город <b>Шахты</b>.<br><br>
-Я создаю поп-музыку, в которой важны эмоции, искренность и атмосфера.
-Этот проект — способ говорить о чувствах честно и без лишнего шума.
-</p>
-</div>
+      <div class="card reveal">
+        <h2>Обо мне</h2>
+        <p>
+          Семь шагов назад — начинающий певец. Настоящее имя — <b>Степанов Алексей Сергеевич</b>.
+          Родился <b>26.07.2005</b> в <b>Константиновске</b>. Живу в Ростовской области, город <b>Шахты</b>.<br><br>
+          Я создаю поп-музыку, в которой важны эмоции, искренность и атмосфера. Этот проект — способ говорить о чувствах честно и без лишнего шума.
+        </p>
+      </div>
 
-<div class="card reveal">
-<h2>Контакты</h2>
-<p class="muted">
-7stepsback.official@gmail.com
-</p>
-</div>
+      <div class="card reveal">
+        <h2>Контакты</h2>
+        <p><b>7stepsback.official@gmail.com</b><br>По сотрудничеству: выступления • реклама • саундтреки • коллаборации</p>
+      </div>
 
-<div class="card links reveal">
-<a href="https://www.instagram.com/seven_steps_back" target="_blank">Instagram</a>
-<a href="https://youtube.com/@sevenstepsback.official" target="_blank">YouTube</a>
-<a href="https://t.me/seven_steps_back_official" target="_blank">Telegram</a>
-<a href="https://vk.com/sevenstepsback" target="_blank">ВКонтакте</a>
-</div>
+      <div class="card reveal links span2">
+        <h2>Ссылки</h2>
+        <a href="https://www.instagram.com/seven_steps_back?igsh=N28yZGJrYms3c3hv" target="_blank" rel="noopener">
+          Instagram <span class="arrow">→</span>
+        </a>
+        <a href="https://youtube.com/@sevenstepsback.official?si=0rkkN3E4-zXN1MPC" target="_blank" rel="noopener">
+          YouTube <span class="arrow">→</span>
+        </a>
+        <a href="https://t.me/seven_steps_back_official" target="_blank" rel="noopener">
+          Telegram <span class="arrow">→</span>
+        </a>
+        <a href="https://vk.com/sevenstepsback" target="_blank" rel="noopener">
+          ВКонтакте <span class="arrow">→</span>
+        </a>
+      </div>
+    </section>
 
-</section>
+    <footer>© <span id="year"></span> Семь шагов назад</footer>
+  </div>
 
-<footer>
-© <span id="year"></span> Семь шагов назад
-</footer>
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
 
-<script>
-document.getElementById("year").textContent = new Date().getFullYear();
-
-const cards = document.querySelectorAll(".card");
-const observer = new IntersectionObserver(entries=>{
-entries.forEach(entry=>{
-if(entry.isIntersecting){
-entry.target.classList.add("show");
-}
-});
-},{threshold:0.15});
-
-cards.forEach(card=>observer.observe(card));
-</script>
-
+    const els = document.querySelectorAll(".reveal");
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{
+        if(e.isIntersecting) e.target.classList.add("show");
+      });
+    }, {threshold: 0.12});
+    els.forEach(el=>io.observe(el));
+  </script>
 </body>
 </html>
